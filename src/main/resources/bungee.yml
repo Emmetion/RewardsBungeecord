@@ -1,0 +1,5 @@
+name: RewardsBungee
+version: 1.0.0
+main: me.emmetion.rewardsbungee.RewardsBungee
+author: Emmetion - Developer
+description: Keep rewards the same across servers.
