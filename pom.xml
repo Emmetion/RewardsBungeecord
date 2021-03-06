@@ -6,7 +6,7 @@
 
     <groupId>me.emmetion</groupId>
     <artifactId>RewardsBungee</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <packaging>jar</packaging>
 
     <name>RewardsBungee</name>
@@ -80,6 +80,5 @@
             <artifactId>h2</artifactId>
             <version>1.4.200</version>
         </dependency>
-
     </dependencies>
 </project>
