@@ -4,7 +4,7 @@ import me.emmetion.rewardsbungee.database.Database;
 import me.emmetion.rewardsbungee.database.RewardData;
 import me.emmetion.rewardsbungee.utils.Utilities;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
-import org.bukkit.entity.Player;
+
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -73,20 +73,13 @@ public class RewardDataManager {
     public static RewardData getRewardData(ProxiedPlayer player) {
 
         if (hasPlayerData(player)) {
-            return playerDataHashMap.get(player.getUniqueId().toString());
+            String uuid = player.getUniqueId().toString();
+            return playerDataHashMap.get(uuid);
         }
-        System.out.println("returning null");
 
         return null;
     }
 
-    public static RewardData getRewardData(Player player){
-
-        ProxiedPlayer proxPlayer = Utilities.getPlayerFromProxy(player);
-
-        return RewardDataManager.getRewardData(proxPlayer);
-
-    }
 
 
     public HashMap<String, RewardData> getPlayerDataHashMap() {
