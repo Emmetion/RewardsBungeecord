@@ -6,11 +6,11 @@ import me.emmetion.rewardsbungee.listeners.JoinQuitListener;
 import me.emmetion.rewardsbungee.managers.RewardDataManager;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Plugin;
-import org.graalvm.compiler.lir.amd64.AMD64ControlFlow;
+
 
 import java.util.concurrent.TimeUnit;
 
-public final class  RewardsBungee extends Plugin {
+public final class RewardsBungee extends Plugin {
 
     public static String connectionURL = "";
     public static RewardsBungee plugin;
