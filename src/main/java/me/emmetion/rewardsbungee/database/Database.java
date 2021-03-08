@@ -7,8 +7,14 @@ import org.bukkit.entity.Player;
 
 import java.sql.*;
 
+/**
+ * The type Database.
+ */
 public class Database {
 
+    /**
+     * Instantiates a new Database.
+     */
     public Database() {
 
     }
@@ -17,7 +23,6 @@ public class Database {
      * If database doesn't exist, it will create a new one at the desired location.
      * Database contains 4 values, (PlayerUUID, Tier1, Tier2, Tier3)
      */
-
     public static void initializeDatabase() {
         try {
             Class.forName("org.h2.Driver");
@@ -41,10 +46,10 @@ public class Database {
 
     /**
      * Prepare Database Statements with this method!
-     * @return Connection
+     *
+     * @return Connection connection
      * @throws SQLException
      */
-
     public static Connection getConnection() {
         Connection connection = null;
         try {
@@ -63,6 +68,12 @@ public class Database {
         return connection;
     }
 
+    /**
+     * Has rewards data boolean.
+     *
+     * @param player the player
+     * @return the boolean
+     */
     public static boolean hasRewardsData(ProxiedPlayer player) {
         Connection connection = getConnection();
         try {
@@ -84,6 +95,12 @@ public class Database {
         return false;
     }
 
+    /**
+     * Has rewards data boolean.
+     *
+     * @param player the player
+     * @return the boolean
+     */
     public static boolean hasRewardsData(Player player) {
         ProxiedPlayer proxiedPlayer = RewardsBungee.plugin.getProxy().getPlayer(player.getUniqueId().toString());
         Connection connection = getConnection();
@@ -106,6 +123,11 @@ public class Database {
         return false;
     }
 
+    /**
+     * Save rewards data.
+     *
+     * @param player the player
+     */
     public static void saveRewardsData(ProxiedPlayer player) {
 
         if (!hasRewardsData(player)) {
@@ -138,6 +160,11 @@ public class Database {
 
     }
 
+    /**
+     * Save rewards data.
+     *
+     * @param player the player
+     */
     public static void saveRewardsData(Player player) {
         ProxiedPlayer proxiedPlayer = RewardsBungee.plugin.getProxy().getPlayer(player.getUniqueId().toString());
 
@@ -171,6 +198,11 @@ public class Database {
 
     }
 
+    /**
+     * Create rewards data.
+     *
+     * @param player the player
+     */
     public static void createRewardsData(ProxiedPlayer player) {
 
         if (hasRewardsData(player)) {
