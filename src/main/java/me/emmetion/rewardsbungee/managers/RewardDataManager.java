@@ -1,8 +1,10 @@
 package me.emmetion.rewardsbungee.managers;
 
+import me.emmetion.rewardsbungee.RewardsBungee;
 import me.emmetion.rewardsbungee.database.Database;
 import me.emmetion.rewardsbungee.database.RewardData;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
+import org.bukkit.entity.Player;
 
 
 import java.sql.PreparedStatement;
@@ -19,8 +21,18 @@ public class RewardDataManager {
 
     }
 
+    public static boolean hasPlayerData(Player player){
+        ProxiedPlayer proxiedPlayer = RewardsBungee.plugin.getProxy().getPlayer(player.getUniqueId().toString());
+        return hasPlayerData(proxiedPlayer);
+    }
+
     public static boolean hasPlayerData(ProxiedPlayer player) {
         return playerDataHashMap.containsKey(player.getUniqueId().toString());
+    }
+
+    public static void addPlayerData(Player player){
+        ProxiedPlayer proxiedPlayer = RewardsBungee.plugin.getProxy().getPlayer(player.getUniqueId().toString());
+        addPlayerData(proxiedPlayer);
     }
 
     public static void addPlayerData(ProxiedPlayer player) {
@@ -63,10 +75,20 @@ public class RewardDataManager {
         playerDataHashMap.put(player.getUniqueId().toString(), new RewardData(uuid, tier1, tier2, tier3));
     }
 
+    public static void removePlayerData(Player player){
+        ProxiedPlayer proxiedPlayer = RewardsBungee.plugin.getProxy().getPlayer(player.getUniqueId().toString());
+        removePlayerData(proxiedPlayer);
+    }
+
     public static void removePlayerData(ProxiedPlayer player) {
         if (hasPlayerData(player)) {
             playerDataHashMap.remove(player.getUniqueId().toString());
         }
+    }
+
+    public static RewardData getRewardData(Player player){
+        ProxiedPlayer proxiedPlayer = RewardsBungee.plugin.getProxy().getPlayer(player.getUniqueId().toString());
+        return getRewardData(proxiedPlayer);
     }
 
     public static RewardData getRewardData(ProxiedPlayer player) {
