@@ -16,8 +16,7 @@ public class JoinQuitListener implements Listener {
     public void onEvent(ServerConnectedEvent event){
 
         ProxiedPlayer player = event.getPlayer();
-
-
+        
         ComponentBuilder component = new ComponentBuilder();
 
         component.append("Event Handled!");

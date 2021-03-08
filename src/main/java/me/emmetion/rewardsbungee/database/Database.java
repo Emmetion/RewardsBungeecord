@@ -3,6 +3,7 @@ package me.emmetion.rewardsbungee.database;
 import me.emmetion.rewardsbungee.RewardsBungee;
 import me.emmetion.rewardsbungee.managers.RewardDataManager;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
+import org.bukkit.entity.Player;
 
 import java.sql.*;
 
@@ -83,6 +84,27 @@ public class Database {
         return false;
     }
 
+    public static boolean hasRewardsData(Player player) {
+        ProxiedPlayer proxiedPlayer = RewardsBungee.plugin.getProxy().getPlayer(player.getUniqueId().toString());
+        Connection connection = getConnection();
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM Rewards WHERE PlayerUUID=?");
+            statement.setString(1, proxiedPlayer.getUniqueId().toString());
+
+            ResultSet resultSet = statement.executeQuery();
+            int t = 0;
+
+            while (resultSet.next()) {
+                t++;
+            }
+            if (t > 0) {
+                return true;
+            }
+        } catch (SQLException e) {
+            System.out.println("Issue Selecting from Rewards Database! containsPlayer() method");
+        }
+        return false;
+    }
 
     public static void saveRewardsData(ProxiedPlayer player) {
 
@@ -96,6 +118,39 @@ public class Database {
             statement = connection.prepareStatement("UPDATE Rewards SET Tier1 = ?, Tier2 = ?, Tier3 = ? WHERE PlayerUUID = ?;");
 
             RewardData data = RewardDataManager.getRewardData(player);
+
+            statement.setInt(1, data.getTier1count());
+            statement.setInt(2, data.getTier2count());
+            statement.setInt(3, data.getTier3count());
+
+            statement.setString(4, player.getUniqueId().toString());
+
+            statement.execute();
+
+
+            System.out.println("Successfully updated players rewarddata!");
+
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    public static void saveRewardsData(Player player) {
+        ProxiedPlayer proxiedPlayer = RewardsBungee.plugin.getProxy().getPlayer(player.getUniqueId().toString());
+
+        if (!hasRewardsData(proxiedPlayer)) {
+            return;
+        }
+
+        Connection connection = getConnection();
+        PreparedStatement statement;
+        try {
+            statement = connection.prepareStatement("UPDATE Rewards SET Tier1 = ?, Tier2 = ?, Tier3 = ? WHERE PlayerUUID = ?;");
+
+            RewardData data = RewardDataManager.getRewardData(proxiedPlayer);
 
             statement.setInt(1, data.getTier1count());
             statement.setInt(2, data.getTier2count());
