@@ -2,7 +2,6 @@ package me.emmetion.rewardsbungee.managers;
 
 import me.emmetion.rewardsbungee.database.Database;
 import me.emmetion.rewardsbungee.database.RewardData;
-import me.emmetion.rewardsbungee.utils.Utilities;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 
 
