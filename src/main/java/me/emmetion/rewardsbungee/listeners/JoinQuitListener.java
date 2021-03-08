@@ -9,6 +9,7 @@ import net.md_5.bungee.api.event.*;
 import net.md_5.bungee.api.plugin.Event;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.event.EventHandler;
+import org.bukkit.entity.Player;
 
 public class JoinQuitListener implements Listener {
 
